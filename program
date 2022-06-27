@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+
+namespace LinqApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Is any number in an array larger than 100
+            var numbers = new[] { 1, 4, 3, 99, 256, 2 };
+            bool isAnyLargerThan100 = IsAny(numbers,number =>
+            {
+                const int max = 100;
+                return number > max;           
+            });
+            Console.WriteLine($"Is any > 100?: {isAnyLargerThan100}");
+            Func<int, bool> isAnyEvenFunc = number => number % 2 == 0;
+
+
+            bool isAnyEven = IsAny(numbers,isAnyEvenFunc);
+            Console.WriteLine($"Is any even?: {isAnyEven}");
+
+            var words = new[] { "aaa", "BBB", "ccc" };
+            bool isAnyOfLength4 = IsAny(words, word => word.Length == 4);
+
+            Console.ReadKey();
+
+        }
+
+        private static bool IsAny<T>(IEnumerable<T> numbers, Func<T,bool> predicate)
+        {
+            // function taking a number and returning a bool
+            foreach(var number in numbers)
+            {
+                if(predicate(number))
+                {
+                    return true;
+
+                }
+            }
+            return false;
+        } 
+        private static bool IsLargerThan100(int number)
+        {
+            return number > 100;
+        }
+
+        private static bool isAnyEven(int[] numbers)
+        {
+            foreach (var number in numbers)
+            {
+                if (number % 2==0)
+                {
+                    return true;
+
+                }
+            }
+            return false;
+        }
+    }
+}
