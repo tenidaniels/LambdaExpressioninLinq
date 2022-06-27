@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LinqApp
+{
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                var words = new List<string> { "a", "bb", "ccc", "ddd" };
+            var shortwords = words.Where(word => word.Length < 3).ToList();
+
+            Console.WriteLine("First iteration");
+            foreach(var word in shortwords)
+            {
+                Console.WriteLine(word);
+            }
+            words.Add("e");
+
+            Console.WriteLine("Second Iterastion");
+            foreach(var word in shortwords)
+            {
+                Console.WriteLine(word);
+            }
+
+            var people = new List<Person>
+            {
+                new Person("John", "USA"),
+                new Person("Betty", "UK")
+            };
+
+            var allAmericans = people.Where(person => person.Country == "USA");
+
+            var notAllAmericans = allAmericans.Take(100);
+
+            var animals = new List<string>()
+            {
+                "Duck","Lion", "Dolphin", "Tiger"
+            };
+            var animalsWithD = animals.Where(
+                animal =>
+                {
+                    Console.WriteLine("Checking animal: " + animal);
+                    return animal.StartsWith('D');
+                });
+
+            foreach(var animal in animalsWithD)
+            {
+                Console.WriteLine(animal);
+            }
+                Console.ReadKey();
+            }
+        }
+    }
