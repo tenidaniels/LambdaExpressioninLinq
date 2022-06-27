@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LinqApp
+{
+    public static class StringExtensions
+    {
+        public static int GetCountOfLines(this string input)
+        {
+            return input.Split("\n").Length;
+        }
+    }
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                var words = new[] { "a", "bb", "ccc", "ddd" };
+                var wordsLongerThan2Letters = words.Where(
+                    word => word.Length > 2);
+
+                Console.WriteLine(string.Join(", ", wordsLongerThan2Letters));
+
+                var multilineString = @" please give me a ride on your back, said the duck 
+                                     kangaroo: ";
+                var countOfLines = multilineString.GetCountOfLines();
+
+                Console.ReadKey();
+
+
+            }
+        }
+    }
+
